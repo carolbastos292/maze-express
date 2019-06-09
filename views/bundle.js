@@ -343,8 +343,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 $(function () {
   var canvasEl = document.getElementsByTagName("canvas")[0];
-  var width = 34;
-  var height = 24;
+  var width = 24;
+  var height = 14;
   canvasEl.height = height * 20 + 40;
   canvasEl.width = width * 20 + 40;
 
@@ -482,8 +482,9 @@ var GenerateMaze = function () {
     }
   }, {
     key: 'renderEndpoints',
+    //propriedade dos pontinhos
     value: function renderEndpoints() {
-      this.ctx.fillStyle = "#3b721a";
+      this.ctx.fillStyle = "yellow";
       var startX = this.startPos[1] * 20 + 25;
       var startY = this.startPos[0] * 20 + 25;
       this.ctx.beginPath();
@@ -491,7 +492,7 @@ var GenerateMaze = function () {
       this.ctx.closePath();
       this.ctx.fill();
 
-      this.ctx.fillStyle = "#871919";
+      this.ctx.fillStyle = "green";
       var goalX = this.goalPos[1] * 20 + 25;
       var goalY = this.goalPos[0] * 20 + 25;
       this.ctx.beginPath();
@@ -584,11 +585,13 @@ var GenerateMaze = function () {
       var renderedEdges = [];
 
       var animateCallback = function animateCallback() {
+        //arestas visitadas
         if (visitedEdges.length > 0) {
           renderedEdges.push(visitedEdges.shift());
 
           renderedEdges.forEach(function (edge, idx) {
-            edge.render(_this4.ctx, "#cc700e");
+            //cor das arestas visitadas
+            edge.render(_this4.ctx, "white");
           });
           _this4.renderEndpoints(_this4.ctx);
 
@@ -607,13 +610,14 @@ var GenerateMaze = function () {
 
       var pathEdges = this.nodesToEdges(this.path);
       var renderedEdges = [];
-
+      //arestas
       var animateCallback = function animateCallback() {
         if (pathEdges.length > 0) {
           renderedEdges.push(pathEdges.shift());
 
           renderedEdges.forEach(function (edge) {
-            edge.render(_this5.ctx, "#1855a0");
+            //pinta cor da aresta
+            edge.render(_this5.ctx, "red");
           });
           _this5.renderEndpoints(_this5.ctx);
 
