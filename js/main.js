@@ -1,4 +1,4 @@
-import GenerateMaze from './generate_maze';
+//import GenerateMaze from './generate_mazess';
 
 $(() => {
   const canvasEl = document.getElementsByTagName("canvas")[0];

@@ -348,7 +348,7 @@ $(function () {
   canvasEl.height = height * 20 + 40;
   canvasEl.width = width * 20 + 40;
 
-  var clickNames = ["BFS", "DFS", "AstarM", "AstarSL", "Dijkstra"];
+  var clickNames = ["Dijkstra"];
 
   var disableAllBtns = function disableAllBtns() {
     clickNames.concat(["maze-regen"]).forEach(function (className) {
@@ -547,22 +547,6 @@ var GenerateMaze = function () {
 
       var path = void 0;var visited = void 0;
       switch (searchType) {
-        case "BFS":
-          path = this.nodesToEdges(this.pathBFS);
-          visited = this.visitedBFS;
-          break;
-        case "DFS":
-          path = this.nodesToEdges(this.pathDFS);
-          visited = this.visitedDFS;
-          break;
-        case "AstarM":
-          path = this.nodesToEdges(this.pathAstarM);
-          visited = this.visitedAstarM;
-          break;
-        case "AstarSL":
-          path = this.nodesToEdges(this.pathAstarSL);
-          visited = this.visitedAstarSL;
-          break;
         case "Dijkstra":
           path = this.nodesToEdges(this.pathDijkstra);
           visited = this.visitedDijkstra;
@@ -586,30 +570,6 @@ var GenerateMaze = function () {
 
       var results = void 0;
       switch (searchType) {
-        case "BFS":
-          this.search = new _bfs2.default(this.grid, "BFS");
-          results = this.search.solve();
-          this.pathBFS = results[0];
-          this.visitedBFS = results[1].slice();
-          break;
-        case "DFS":
-          this.search = new _bfs2.default(this.grid, "DFS");
-          results = this.search.solve();
-          this.pathDFS = results[0];
-          this.visitedDFS = results[1].slice();
-          break;
-        case "AstarM":
-          this.search = new _a_star2.default(this.grid, "M");
-          results = this.search.solve();
-          this.pathAstarM = results[0];
-          this.visitedAstarM = results[1].slice();
-          break;
-        case "AstarSL":
-          this.search = new _a_star2.default(this.grid, "SL");
-          results = this.search.solve();
-          this.pathAstarSL = results[0];
-          this.visitedAstarSL = results[1].slice();
-          break;
         case "Dijkstra":
           this.search = new _dijkstra2.default(this.grid, "M");
           results = this.search.solve();
