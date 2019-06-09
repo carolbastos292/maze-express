@@ -1,4 +1,3 @@
-import Grid from './grid';
 import Prims from './prims';
 import Edge from './edge';
 import Dijkstra from './dijkstra';
