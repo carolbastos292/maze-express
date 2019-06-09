@@ -434,17 +434,9 @@ var _edge = __webpack_require__(0);
 
 var _edge2 = _interopRequireDefault(_edge);
 
-var _a_star = __webpack_require__(7);
-
-var _a_star2 = _interopRequireDefault(_a_star);
-
 var _dijkstra = __webpack_require__(8);
 
 var _dijkstra2 = _interopRequireDefault(_dijkstra);
-
-var _bfs = __webpack_require__(9);
-
-var _bfs2 = _interopRequireDefault(_bfs);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -680,6 +672,7 @@ Grid.makeGrid = function (width, height) {
     }
     grid.push(row);
   }
+  console.log(grid);
   return grid;
 };
 
@@ -782,128 +775,7 @@ var Prims = function () {
 exports.default = Prims;
 
 /***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _binary_heap = __webpack_require__(2);
-
-var _binary_heap2 = _interopRequireDefault(_binary_heap);
-
-var _edge = __webpack_require__(0);
-
-var _edge2 = _interopRequireDefault(_edge);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var AStar = function () {
-  function AStar(grid, heuristic) {
-    _classCallCheck(this, AStar);
-
-    this.pq = new _binary_heap2.default();
-    this.grid = grid;
-    this.visited = {
-      bool: new Array(grid.width * grid.height).fill(false),
-      pq: new _binary_heap2.default(),
-      save: []
-    };
-    this.goalValue = grid.goalPos[0] * grid.width + grid.goalPos[1];
-    this.heuristic = heuristic;
-    this.setupPriorityQueue();
-  }
-
-  _createClass(AStar, [{
-    key: 'setupPriorityQueue',
-    value: function setupPriorityQueue() {
-      var _grid$startPos = _slicedToArray(this.grid.startPos, 2),
-          startY = _grid$startPos[0],
-          startX = _grid$startPos[1];
-
-      var startNode = this.grid.array[startY][startX];
-      startNode.costSoFar = 0;
-      startNode.goalPos = this.grid.goalPos;
-      startNode.calcHeuristic(startNode, this.heuristic);
-      startNode.parent = null;
-      this.visited.bool[startNode.value] = true;
-      this.pq.put(startNode);
-    }
-  }, {
-    key: 'traverseGrid',
-    value: function traverseGrid() {
-      var _this = this;
-
-      var _loop = function _loop() {
-        var current = _this.pq.take();
-
-        _this.visited.save.push(_this.visited.pq.take());
-
-        if (current.value === _this.goalValue) {
-          return {
-            v: current
-          };
-        }
-
-        current.edgeNeighbors.forEach(function (neighbor) {
-          var newCost = neighbor.calcHeuristic(current, _this.heuristic);
-
-          if (!_this.visited.bool[neighbor.value] || newCost < neighbor.weight) {
-            _this.visited.bool[neighbor.value] = true;
-            neighbor.weight = newCost;
-            neighbor.parent = current;
-            _this.pq.put(neighbor);
-
-            var edge = new _edge2.default(current, neighbor, true);
-            edge.weight = neighbor.weight;
-            _this.visited.pq.put(edge);
-          }
-        });
-      };
-
-      while (this.pq.length() > 1) {
-        var _ret = _loop();
-
-        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-      }
-    }
-  }, {
-    key: 'traversePath',
-    value: function traversePath() {
-      var path = [this.traverseGrid()];
-
-      while (path.slice(-1)[0].parent) {
-        path.push(path.slice(-1)[0].parent);
-      }
-
-      return [path, this.visited.save.slice(1)];
-    }
-  }, {
-    key: 'solve',
-    value: function solve() {
-      return this.traversePath();
-    }
-  }]);
-
-  return AStar;
-}();
-
-exports.default = AStar;
-
-/***/ }),
-/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
