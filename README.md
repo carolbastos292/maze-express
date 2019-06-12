@@ -5,6 +5,7 @@
 - html5
 - webpack
 - javascript
+- bootstrap
 
 2. Algoritmos
 - Prim para geração do labirinto 
