@@ -16,5 +16,11 @@
 - Fazer movimentação de saída com Dijkstra.
 
 4. Resultados
+- Labirinto gerado com algoritmo de Prim
+![alt text](https://github.com/carolbastos292/maze-express/blob/master/assets/labirintoPrim.png)
+
+- Caminho mínimo encontrado com algoritmo de Dijkstra
 ![alt text](https://github.com/carolbastos292/maze-express/blob/master/assets/caminho%20minimo%20com%20Dijsktra.png)
+
+
 
