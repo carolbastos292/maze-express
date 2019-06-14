@@ -15,3 +15,6 @@
 - Gerar labirinto com prim/kruskal.
 - Fazer movimentação de saída com Dijkstra.
 
+4. Resultados
+![alt text](https://github.com/carolbastos292/maze-express/blob/master/assets/caminho%20minimo%20com%20Dijsktra.png)
+
