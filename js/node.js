@@ -6,7 +6,7 @@ class Node {
   }
 
   calcHeuristic(fromNode, heuristic, dijkstra) {
-    // This is the heuristic for A* and Dijkstra's
+    // This is the heuristic for Dijkstra's
     // Setting this.weight to result to be compatible with binary heap
     this.costSoFar = fromNode.costSoFar + fromNode.costToPos(
       this.pos, heuristic

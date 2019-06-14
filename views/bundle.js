@@ -155,7 +155,7 @@ var Node = function () {
   _createClass(Node, [{
     key: "calcHeuristic",
     value: function calcHeuristic(fromNode, heuristic, dijkstra) {
-      // This is the heuristic for A* and Dijkstra's
+      // This is the heuristic for Dijkstra's
       // Setting this.weight to result to be compatible with binary heap
       this.costSoFar = fromNode.costSoFar + fromNode.costToPos(this.pos, heuristic);
       if (dijkstra) {
@@ -328,7 +328,10 @@ var BinaryMinHeap = function () {
 
 exports.default = BinaryMinHeap;
 
+
 /***/ }),
+
+//generate maze
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -343,11 +346,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 $(function () {
   var canvasEl = document.getElementsByTagName("canvas")[0];
-  var width = 24;
-  var height = 14;
+  //size maze
+  var width = 20;
+  var height = 20;
   canvasEl.height = height * 20 + 40;
   canvasEl.width = width * 20 + 40;
-
+  console.log("Largura",width);
+  console.log("Altura", height);
   var clickNames = ["Dijkstra"];
 
   var disableAllBtns = function disableAllBtns() {
@@ -466,7 +471,8 @@ var GenerateMaze = function () {
       var _this = this;
 
       this.ctx.clearRect(10, 10, this.width, this.height);
-      this.ctx.fillStyle = "rgb(35, 35, 35)";
+      //color background maze
+      this.ctx.fillStyle = "black";
       this.ctx.fillRect(10, 10, this.width, this.height);
       edges.forEach(function (edge) {
         edge.render(_this.ctx, "grey");
@@ -505,6 +511,7 @@ var GenerateMaze = function () {
 
       this.setup(this.grid.width, this.grid.height);
       this.allEdges = new _prims2.default(this.grid).generate();
+      console.log(this.allEdges);
       this.edges = [];
       var i = 0;
 
@@ -547,7 +554,7 @@ var GenerateMaze = function () {
       }
 
       visited.forEach(function (edge) {
-        edge.render(_this3.ctx, "#cc700e");
+        edge.render(_this3.ctx, "#cc701e");
       });
 
       path.forEach(function (edge) {
@@ -584,6 +591,7 @@ var GenerateMaze = function () {
           renderedEdges.forEach(function (edge, idx) {
             //cor das arestas visitadas
             edge.render(_this4.ctx, "white");
+            
           });
           _this4.renderEndpoints(_this4.ctx);
 
